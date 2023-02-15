@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="463252ec49ae483b9dd8fdd274eaa125" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="CMSDBModel.UserTbl" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CMSDBModel.tblLGA" Width="1.5" PointX="7" PointY="9.125" />
+        <EntityTypeShape EntityType="CMSDBModel.tblState" Width="1.5" PointX="4.75" PointY="9.125" />
+        <EntityTypeShape EntityType="CMSDBModel.tblWard" Width="1.5" PointX="9.25" PointY="15" />
+        <AssociationConnector Association="CMSDBModel.FK_tblLGA_tblState" />
+        <AssociationConnector Association="CMSDBModel.FK_tblWard_tblLGA" />
+        <AssociationConnector Association="CMSDBModel.FK_UserTbl_tblLGA" />
+        <AssociationConnector Association="CMSDBModel.FK_tblWard_tblState" />
+        <AssociationConnector Association="CMSDBModel.FK_UserTbl_tblState" />
+        <AssociationConnector Association="CMSDBModel.FK_UserTbl_tblWard" />
+        <EntityTypeShape EntityType="CMSDBModel.tblINECVotersRegister" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CMSDBModel.tblElectionResult" Width="1.5" PointX="7.625" PointY="1" />
+        <EntityTypeShape EntityType="CMSDBModel.tblPoliticalParty" Width="1.5" PointX="10" PointY="2.125" />
+        <AssociationConnector Association="CMSDBModel.FK_tblElectionResult_tblPoliticalParty" />
+        <EntityTypeShape EntityType="CMSDBModel.tblPollingBooth" Width="1.5" PointX="11.5" PointY="12" />
+        <AssociationConnector Association="CMSDBModel.FK_tblPollingBooth_tblLGA" />
+        <AssociationConnector Association="CMSDBModel.FK_tblPollingBooth_tblState" />
+        <AssociationConnector Association="CMSDBModel.FK_tblPollingBooth_tblWard" />
+        <AssociationConnector Association="CMSDBModel.FK_UserTbl_tblPollingBooth" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

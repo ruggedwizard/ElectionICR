@@ -1,0 +1,962 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CMSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblElectionResult">
+          <Key>
+            <PropertyRef Name="ElectionResultId" />
+          </Key>
+          <Property Name="ElectionResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ElectionDefinitionId" Type="int" />
+          <Property Name="PartyId" Type="int" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="LGAId" Type="int" />
+          <Property Name="WardId" Type="int" />
+          <Property Name="PollingBoothId" Type="int" />
+          <Property Name="ValidVotes" Type="int" />
+          <Property Name="VoidedVotes" Type="int" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="tblINECVotersRegister">
+          <Key>
+            <PropertyRef Name="VotersRegisterID" />
+          </Key>
+          <Property Name="StateId" Type="int" />
+          <Property Name="LGAId" Type="int" />
+          <Property Name="WardId" Type="int" />
+          <Property Name="PollingBoothId" Type="int" />
+          <Property Name="Delim" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="OtherName" Type="nvarchar" MaxLength="50" />
+          <Property Name="VIN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PassportPhoto" Type="nvarchar" MaxLength="100" />
+          <Property Name="YearOfBirth" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="VotersRegisterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="Occupation" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tblLGA">
+          <Key>
+            <PropertyRef Name="LGAId" />
+          </Key>
+          <Property Name="LGAId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LGAName" Type="nvarchar" MaxLength="200" />
+          <Property Name="LGACode" Type="nvarchar" MaxLength="50" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="tblPoliticalParty">
+          <Key>
+            <PropertyRef Name="PartyId" />
+          </Key>
+          <Property Name="PartyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartyName" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="PartyLogo" Type="nvarchar" MaxLength="200" />
+          <Property Name="PartyCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblPollingBooth">
+          <Key>
+            <PropertyRef Name="PollingBoothId" />
+          </Key>
+          <Property Name="StateId" Type="int" />
+          <Property Name="LGAId" Type="int" />
+          <Property Name="WardId" Type="int" />
+          <Property Name="PollingBoothCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="PollingBoothName" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="PollingBoothId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="Delim" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblState">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateDescription" Type="nvarchar" MaxLength="200" />
+          <Property Name="StateCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="NoRegisteredUsers" Type="int" />
+        </EntityType>
+        <EntityType Name="tblWard">
+          <Key>
+            <PropertyRef Name="WardId" />
+          </Key>
+          <Property Name="StateId" Type="int" />
+          <Property Name="LGAId" Type="int" />
+          <Property Name="WardDescription" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="WardCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="WardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WardAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="WardIdNew" Type="int" />
+        </EntityType>
+        <EntityType Name="UserTbl">
+          <Key>
+            <PropertyRef Name="UserIdenfiticationNumber" />
+          </Key>
+          <Property Name="UserIdenfiticationNumber" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="Password" Type="nvarchar" MaxLength="700" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassportPhoto" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="OperationalLevelID" Type="int" />
+          <Property Name="UserCategoryID" Type="int" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdentificationType" Type="nvarchar" MaxLength="50" />
+          <Property Name="MeansOfIdentification" Type="nvarchar" MaxLength="300" />
+          <Property Name="Occupation" Type="nvarchar" MaxLength="100" />
+          <Property Name="AgeRange" Type="nvarchar" MaxLength="50" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="LGAId" Type="int" />
+          <Property Name="UserApprovalStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="WardId" Type="int" />
+          <Property Name="PollingBoothId" Type="int" />
+          <Property Name="NoHouseholdPeople" Type="int" />
+          <Property Name="NoHousePpleWithPVC" Type="int" />
+          <Property Name="HouseholdNeed1" Type="nvarchar" MaxLength="100" />
+          <Property Name="HouseholdNeed2" Type="nvarchar" MaxLength="100" />
+          <Property Name="HouseholdNeed3" Type="nvarchar" MaxLength="100" />
+          <Property Name="HouseholdNeed4" Type="nvarchar" MaxLength="100" />
+          <Property Name="HouseholdNeed5" Type="nvarchar" MaxLength="100" />
+          <Property Name="MobilizerRep" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobilizerRepCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="LanguageSpoken1" Type="nvarchar" MaxLength="50" />
+          <Property Name="LanguageSpoken2" Type="nvarchar" MaxLength="50" />
+          <Property Name="LanguageSpoken3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Qualification" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmploymentStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="RefererCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="PreviousGroupId" Type="int" />
+          <Property Name="CurrentGroupId" Type="int" />
+          <Property Name="UserFirstPortfolio" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserSecondPortfolio" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserReferralCount" Type="int" />
+          <Property Name="VIN" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_tblElectionResult_tblPoliticalParty">
+          <End Role="tblPoliticalParty" Type="Self.tblPoliticalParty" Multiplicity="0..1" />
+          <End Role="tblElectionResult" Type="Self.tblElectionResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPoliticalParty">
+              <PropertyRef Name="PartyId" />
+            </Principal>
+            <Dependent Role="tblElectionResult">
+              <PropertyRef Name="PartyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblLGA_tblState">
+          <End Role="tblState" Type="Self.tblState" Multiplicity="0..1" />
+          <End Role="tblLGA" Type="Self.tblLGA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblState">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tblLGA">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPollingBooth_tblLGA">
+          <End Role="tblLGA" Type="Self.tblLGA" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblPollingBooth" Type="Self.tblPollingBooth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLGA">
+              <PropertyRef Name="LGAId" />
+            </Principal>
+            <Dependent Role="tblPollingBooth">
+              <PropertyRef Name="LGAId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPollingBooth_tblState">
+          <End Role="tblState" Type="Self.tblState" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblPollingBooth" Type="Self.tblPollingBooth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblState">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tblPollingBooth">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPollingBooth_tblWard">
+          <End Role="tblWard" Type="Self.tblWard" Multiplicity="0..1" />
+          <End Role="tblPollingBooth" Type="Self.tblPollingBooth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWard">
+              <PropertyRef Name="WardId" />
+            </Principal>
+            <Dependent Role="tblPollingBooth">
+              <PropertyRef Name="WardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWard_tblLGA">
+          <End Role="tblLGA" Type="Self.tblLGA" Multiplicity="0..1" />
+          <End Role="tblWard" Type="Self.tblWard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLGA">
+              <PropertyRef Name="LGAId" />
+            </Principal>
+            <Dependent Role="tblWard">
+              <PropertyRef Name="LGAId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWard_tblState">
+          <End Role="tblState" Type="Self.tblState" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblWard" Type="Self.tblWard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblState">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tblWard">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTbl_tblLGA">
+          <End Role="tblLGA" Type="Self.tblLGA" Multiplicity="0..1" />
+          <End Role="UserTbl" Type="Self.UserTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLGA">
+              <PropertyRef Name="LGAId" />
+            </Principal>
+            <Dependent Role="UserTbl">
+              <PropertyRef Name="LGAId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTbl_tblPollingBooth">
+          <End Role="tblPollingBooth" Type="Self.tblPollingBooth" Multiplicity="0..1" />
+          <End Role="UserTbl" Type="Self.UserTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPollingBooth">
+              <PropertyRef Name="PollingBoothId" />
+            </Principal>
+            <Dependent Role="UserTbl">
+              <PropertyRef Name="PollingBoothId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTbl_tblState">
+          <End Role="tblState" Type="Self.tblState" Multiplicity="0..1" />
+          <End Role="UserTbl" Type="Self.UserTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblState">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="UserTbl">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTbl_tblWard">
+          <End Role="tblWard" Type="Self.tblWard" Multiplicity="0..1" />
+          <End Role="UserTbl" Type="Self.UserTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWard">
+              <PropertyRef Name="WardId" />
+            </Principal>
+            <Dependent Role="UserTbl">
+              <PropertyRef Name="WardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CMSDBModelStoreContainer">
+          <EntitySet Name="tblElectionResult" EntityType="Self.tblElectionResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblINECVotersRegister" EntityType="Self.tblINECVotersRegister" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLGA" EntityType="Self.tblLGA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPoliticalParty" EntityType="Self.tblPoliticalParty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPollingBooth" EntityType="Self.tblPollingBooth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblState" EntityType="Self.tblState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWard" EntityType="Self.tblWard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTbl" EntityType="Self.UserTbl" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblElectionResult_tblPoliticalParty" Association="Self.FK_tblElectionResult_tblPoliticalParty">
+            <End Role="tblPoliticalParty" EntitySet="tblPoliticalParty" />
+            <End Role="tblElectionResult" EntitySet="tblElectionResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblLGA_tblState" Association="Self.FK_tblLGA_tblState">
+            <End Role="tblState" EntitySet="tblState" />
+            <End Role="tblLGA" EntitySet="tblLGA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPollingBooth_tblLGA" Association="Self.FK_tblPollingBooth_tblLGA">
+            <End Role="tblLGA" EntitySet="tblLGA" />
+            <End Role="tblPollingBooth" EntitySet="tblPollingBooth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPollingBooth_tblState" Association="Self.FK_tblPollingBooth_tblState">
+            <End Role="tblState" EntitySet="tblState" />
+            <End Role="tblPollingBooth" EntitySet="tblPollingBooth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPollingBooth_tblWard" Association="Self.FK_tblPollingBooth_tblWard">
+            <End Role="tblWard" EntitySet="tblWard" />
+            <End Role="tblPollingBooth" EntitySet="tblPollingBooth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWard_tblLGA" Association="Self.FK_tblWard_tblLGA">
+            <End Role="tblLGA" EntitySet="tblLGA" />
+            <End Role="tblWard" EntitySet="tblWard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWard_tblState" Association="Self.FK_tblWard_tblState">
+            <End Role="tblState" EntitySet="tblState" />
+            <End Role="tblWard" EntitySet="tblWard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTbl_tblLGA" Association="Self.FK_UserTbl_tblLGA">
+            <End Role="tblLGA" EntitySet="tblLGA" />
+            <End Role="UserTbl" EntitySet="UserTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTbl_tblPollingBooth" Association="Self.FK_UserTbl_tblPollingBooth">
+            <End Role="tblPollingBooth" EntitySet="tblPollingBooth" />
+            <End Role="UserTbl" EntitySet="UserTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTbl_tblState" Association="Self.FK_UserTbl_tblState">
+            <End Role="tblState" EntitySet="tblState" />
+            <End Role="UserTbl" EntitySet="UserTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTbl_tblWard" Association="Self.FK_UserTbl_tblWard">
+            <End Role="tblWard" EntitySet="tblWard" />
+            <End Role="UserTbl" EntitySet="UserTbl" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CMSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="UserTbl">
+          <Key>
+            <PropertyRef Name="UserIdenfiticationNumber" />
+          </Key>
+          <Property Name="UserIdenfiticationNumber" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="700" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassportPhoto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="OperationalLevelID" Type="Int32" />
+          <Property Name="UserCategoryID" Type="Int32" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdentificationType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MeansOfIdentification" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AgeRange" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="LGAId" Type="Int32" />
+          <Property Name="UserApprovalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WardId" Type="Int32" />
+          <Property Name="PollingBoothId" Type="Int32" />
+          <Property Name="NoHouseholdPeople" Type="Int32" />
+          <Property Name="NoHousePpleWithPVC" Type="Int32" />
+          <Property Name="HouseholdNeed1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HouseholdNeed2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HouseholdNeed3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HouseholdNeed4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HouseholdNeed5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MobilizerRep" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobilizerRepCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LanguageSpoken1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LanguageSpoken2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LanguageSpoken3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qualification" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmploymentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RefererCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PreviousGroupId" Type="Int32" />
+          <Property Name="CurrentGroupId" Type="Int32" />
+          <Property Name="UserFirstPortfolio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserSecondPortfolio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserReferralCount" Type="Int32" />
+          <Property Name="VIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblLGA" Relationship="CMSDBModel.FK_UserTbl_tblLGA" FromRole="UserTbl" ToRole="tblLGA" />
+          <NavigationProperty Name="tblState" Relationship="CMSDBModel.FK_UserTbl_tblState" FromRole="UserTbl" ToRole="tblState" />
+          <NavigationProperty Name="tblWard" Relationship="CMSDBModel.FK_UserTbl_tblWard" FromRole="UserTbl" ToRole="tblWard" />
+          <NavigationProperty Name="tblPollingBooth" Relationship="CMSDBModel.FK_UserTbl_tblPollingBooth" FromRole="UserTbl" ToRole="tblPollingBooth" />
+        </EntityType>
+        <EntityContainer Name="CMSDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserTbls" EntityType="Self.UserTbl" />
+          <EntitySet Name="tblLGAs" EntityType="CMSDBModel.tblLGA" />
+          <EntitySet Name="tblStates" EntityType="CMSDBModel.tblState" />
+          <EntitySet Name="tblWards" EntityType="CMSDBModel.tblWard" />
+          <AssociationSet Name="FK_tblLGA_tblState" Association="CMSDBModel.FK_tblLGA_tblState">
+            <End Role="tblState" EntitySet="tblStates" />
+            <End Role="tblLGA" EntitySet="tblLGAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWard_tblLGA" Association="CMSDBModel.FK_tblWard_tblLGA">
+            <End Role="tblLGA" EntitySet="tblLGAs" />
+            <End Role="tblWard" EntitySet="tblWards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTbl_tblLGA" Association="CMSDBModel.FK_UserTbl_tblLGA">
+            <End Role="tblLGA" EntitySet="tblLGAs" />
+            <End Role="UserTbl" EntitySet="UserTbls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblWard_tblState" Association="CMSDBModel.FK_tblWard_tblState">
+            <End Role="tblState" EntitySet="tblStates" />
+            <End Role="tblWard" EntitySet="tblWards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTbl_tblState" Association="CMSDBModel.FK_UserTbl_tblState">
+            <End Role="tblState" EntitySet="tblStates" />
+            <End Role="UserTbl" EntitySet="UserTbls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTbl_tblWard" Association="CMSDBModel.FK_UserTbl_tblWard">
+            <End Role="tblWard" EntitySet="tblWards" />
+            <End Role="UserTbl" EntitySet="UserTbls" />
+          </AssociationSet>
+          <EntitySet Name="tblINECVotersRegisters" EntityType="CMSDBModel.tblINECVotersRegister" />
+          <EntitySet Name="tblElectionResults" EntityType="CMSDBModel.tblElectionResult" />
+          <EntitySet Name="tblPoliticalParties" EntityType="CMSDBModel.tblPoliticalParty" />
+          <AssociationSet Name="FK_tblElectionResult_tblPoliticalParty" Association="CMSDBModel.FK_tblElectionResult_tblPoliticalParty">
+            <End Role="tblPoliticalParty" EntitySet="tblPoliticalParties" />
+            <End Role="tblElectionResult" EntitySet="tblElectionResults" />
+          </AssociationSet>
+          <EntitySet Name="tblPollingBooths" EntityType="CMSDBModel.tblPollingBooth" />
+          <AssociationSet Name="FK_tblPollingBooth_tblLGA" Association="CMSDBModel.FK_tblPollingBooth_tblLGA">
+            <End Role="tblLGA" EntitySet="tblLGAs" />
+            <End Role="tblPollingBooth" EntitySet="tblPollingBooths" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPollingBooth_tblState" Association="CMSDBModel.FK_tblPollingBooth_tblState">
+            <End Role="tblState" EntitySet="tblStates" />
+            <End Role="tblPollingBooth" EntitySet="tblPollingBooths" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblPollingBooth_tblWard" Association="CMSDBModel.FK_tblPollingBooth_tblWard">
+            <End Role="tblWard" EntitySet="tblWards" />
+            <End Role="tblPollingBooth" EntitySet="tblPollingBooths" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTbl_tblPollingBooth" Association="CMSDBModel.FK_UserTbl_tblPollingBooth">
+            <End Role="tblPollingBooth" EntitySet="tblPollingBooths" />
+            <End Role="UserTbl" EntitySet="UserTbls" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblLGA">
+          <Key>
+            <PropertyRef Name="LGAId" />
+          </Key>
+          <Property Name="LGAId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LGAName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LGACode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="tblState" Relationship="CMSDBModel.FK_tblLGA_tblState" FromRole="tblLGA" ToRole="tblState" />
+          <NavigationProperty Name="tblWards" Relationship="CMSDBModel.FK_tblWard_tblLGA" FromRole="tblLGA" ToRole="tblWard" />
+          <NavigationProperty Name="UserTbls" Relationship="CMSDBModel.FK_UserTbl_tblLGA" FromRole="tblLGA" ToRole="UserTbl" />
+          <NavigationProperty Name="tblPollingBooths" Relationship="CMSDBModel.FK_tblPollingBooth_tblLGA" FromRole="tblLGA" ToRole="tblPollingBooth" />
+        </EntityType>
+        <EntityType Name="tblState">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StateCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="NoRegisteredUsers" Type="Int32" />
+          <NavigationProperty Name="tblLGAs" Relationship="CMSDBModel.FK_tblLGA_tblState" FromRole="tblState" ToRole="tblLGA" />
+          <NavigationProperty Name="tblWards" Relationship="CMSDBModel.FK_tblWard_tblState" FromRole="tblState" ToRole="tblWard" />
+          <NavigationProperty Name="UserTbls" Relationship="CMSDBModel.FK_UserTbl_tblState" FromRole="tblState" ToRole="UserTbl" />
+          <NavigationProperty Name="tblPollingBooths" Relationship="CMSDBModel.FK_tblPollingBooth_tblState" FromRole="tblState" ToRole="tblPollingBooth" />
+        </EntityType>
+        <EntityType Name="tblWard">
+          <Key>
+            <PropertyRef Name="WardId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="LGAId" Type="Int32" />
+          <Property Name="WardDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="WardCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WardAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="WardIdNew" Type="Int32" />
+          <NavigationProperty Name="tblLGA" Relationship="CMSDBModel.FK_tblWard_tblLGA" FromRole="tblWard" ToRole="tblLGA" />
+          <NavigationProperty Name="tblState" Relationship="CMSDBModel.FK_tblWard_tblState" FromRole="tblWard" ToRole="tblState" />
+          <NavigationProperty Name="UserTbls" Relationship="CMSDBModel.FK_UserTbl_tblWard" FromRole="tblWard" ToRole="UserTbl" />
+          <NavigationProperty Name="tblPollingBooths" Relationship="CMSDBModel.FK_tblPollingBooth_tblWard" FromRole="tblWard" ToRole="tblPollingBooth" />
+        </EntityType>
+        <Association Name="FK_tblLGA_tblState">
+          <End Type="CMSDBModel.tblState" Role="tblState" Multiplicity="0..1" />
+          <End Type="CMSDBModel.tblLGA" Role="tblLGA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblState">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tblLGA">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWard_tblLGA">
+          <End Type="CMSDBModel.tblLGA" Role="tblLGA" Multiplicity="0..1" />
+          <End Type="CMSDBModel.tblWard" Role="tblWard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLGA">
+              <PropertyRef Name="LGAId" />
+            </Principal>
+            <Dependent Role="tblWard">
+              <PropertyRef Name="LGAId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTbl_tblLGA">
+          <End Type="CMSDBModel.tblLGA" Role="tblLGA" Multiplicity="0..1" />
+          <End Type="CMSDBModel.UserTbl" Role="UserTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLGA">
+              <PropertyRef Name="LGAId" />
+            </Principal>
+            <Dependent Role="UserTbl">
+              <PropertyRef Name="LGAId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblWard_tblState">
+          <End Type="CMSDBModel.tblState" Role="tblState" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CMSDBModel.tblWard" Role="tblWard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblState">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tblWard">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTbl_tblState">
+          <End Type="CMSDBModel.tblState" Role="tblState" Multiplicity="0..1" />
+          <End Type="CMSDBModel.UserTbl" Role="UserTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblState">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="UserTbl">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTbl_tblWard">
+          <End Type="CMSDBModel.tblWard" Role="tblWard" Multiplicity="0..1" />
+          <End Type="CMSDBModel.UserTbl" Role="UserTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWard">
+              <PropertyRef Name="WardId" />
+            </Principal>
+            <Dependent Role="UserTbl">
+              <PropertyRef Name="WardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblINECVotersRegister">
+          <Key>
+            <PropertyRef Name="VotersRegisterID" />
+          </Key>
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="LGAId" Type="Int32" />
+          <Property Name="WardId" Type="Int32" />
+          <Property Name="PollingBoothId" Type="Int32" />
+          <Property Name="Delim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OtherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VIN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PassportPhoto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="YearOfBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="VotersRegisterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblElectionResult">
+          <Key>
+            <PropertyRef Name="ElectionResultId" />
+          </Key>
+          <Property Name="ElectionResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ElectionDefinitionId" Type="Int32" />
+          <Property Name="PartyId" Type="Int32" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="LGAId" Type="Int32" />
+          <Property Name="WardId" Type="Int32" />
+          <Property Name="PollingBoothId" Type="Int32" />
+          <Property Name="ValidVotes" Type="Int32" />
+          <Property Name="VoidedVotes" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="tblPoliticalParty" Relationship="CMSDBModel.FK_tblElectionResult_tblPoliticalParty" FromRole="tblElectionResult" ToRole="tblPoliticalParty" />
+        </EntityType>
+        <EntityType Name="tblPoliticalParty">
+          <Key>
+            <PropertyRef Name="PartyId" />
+          </Key>
+          <Property Name="PartyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="PartyLogo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PartyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblElectionResults" Relationship="CMSDBModel.FK_tblElectionResult_tblPoliticalParty" FromRole="tblPoliticalParty" ToRole="tblElectionResult" />
+        </EntityType>
+        <Association Name="FK_tblElectionResult_tblPoliticalParty">
+          <End Type="CMSDBModel.tblPoliticalParty" Role="tblPoliticalParty" Multiplicity="0..1" />
+          <End Type="CMSDBModel.tblElectionResult" Role="tblElectionResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPoliticalParty">
+              <PropertyRef Name="PartyId" />
+            </Principal>
+            <Dependent Role="tblElectionResult">
+              <PropertyRef Name="PartyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblPollingBooth">
+          <Key>
+            <PropertyRef Name="PollingBoothId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="LGAId" Type="Int32" />
+          <Property Name="WardId" Type="Int32" />
+          <Property Name="PollingBoothCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PollingBoothName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PollingBoothId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="Delim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblLGA" Relationship="CMSDBModel.FK_tblPollingBooth_tblLGA" FromRole="tblPollingBooth" ToRole="tblLGA" />
+          <NavigationProperty Name="tblState" Relationship="CMSDBModel.FK_tblPollingBooth_tblState" FromRole="tblPollingBooth" ToRole="tblState" />
+          <NavigationProperty Name="tblWard" Relationship="CMSDBModel.FK_tblPollingBooth_tblWard" FromRole="tblPollingBooth" ToRole="tblWard" />
+          <NavigationProperty Name="UserTbls" Relationship="CMSDBModel.FK_UserTbl_tblPollingBooth" FromRole="tblPollingBooth" ToRole="UserTbl" />
+        </EntityType>
+        <Association Name="FK_tblPollingBooth_tblLGA">
+          <End Type="CMSDBModel.tblLGA" Role="tblLGA" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CMSDBModel.tblPollingBooth" Role="tblPollingBooth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLGA">
+              <PropertyRef Name="LGAId" />
+            </Principal>
+            <Dependent Role="tblPollingBooth">
+              <PropertyRef Name="LGAId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPollingBooth_tblState">
+          <End Type="CMSDBModel.tblState" Role="tblState" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CMSDBModel.tblPollingBooth" Role="tblPollingBooth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblState">
+              <PropertyRef Name="StateId" />
+            </Principal>
+            <Dependent Role="tblPollingBooth">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblPollingBooth_tblWard">
+          <End Type="CMSDBModel.tblWard" Role="tblWard" Multiplicity="0..1" />
+          <End Type="CMSDBModel.tblPollingBooth" Role="tblPollingBooth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWard">
+              <PropertyRef Name="WardId" />
+            </Principal>
+            <Dependent Role="tblPollingBooth">
+              <PropertyRef Name="WardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTbl_tblPollingBooth">
+          <End Type="CMSDBModel.tblPollingBooth" Role="tblPollingBooth" Multiplicity="0..1" />
+          <End Type="CMSDBModel.UserTbl" Role="UserTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPollingBooth">
+              <PropertyRef Name="PollingBoothId" />
+            </Principal>
+            <Dependent Role="UserTbl">
+              <PropertyRef Name="PollingBoothId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CMSDBModelStoreContainer" CdmEntityContainer="CMSDBEntities">
+          <EntitySetMapping Name="UserTbls">
+            <EntityTypeMapping TypeName="CMSDBModel.UserTbl">
+              <MappingFragment StoreEntitySet="UserTbl">
+                <ScalarProperty Name="UserIdenfiticationNumber" ColumnName="UserIdenfiticationNumber" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PassportPhoto" ColumnName="PassportPhoto" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="OperationalLevelID" ColumnName="OperationalLevelID" />
+                <ScalarProperty Name="UserCategoryID" ColumnName="UserCategoryID" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="IdentificationType" ColumnName="IdentificationType" />
+                <ScalarProperty Name="MeansOfIdentification" ColumnName="MeansOfIdentification" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="AgeRange" ColumnName="AgeRange" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="LGAId" ColumnName="LGAId" />
+                <ScalarProperty Name="UserApprovalStatus" ColumnName="UserApprovalStatus" />
+                <ScalarProperty Name="WardId" ColumnName="WardId" />
+                <ScalarProperty Name="PollingBoothId" ColumnName="PollingBoothId" />
+                <ScalarProperty Name="NoHouseholdPeople" ColumnName="NoHouseholdPeople" />
+                <ScalarProperty Name="NoHousePpleWithPVC" ColumnName="NoHousePpleWithPVC" />
+                <ScalarProperty Name="HouseholdNeed1" ColumnName="HouseholdNeed1" />
+                <ScalarProperty Name="HouseholdNeed2" ColumnName="HouseholdNeed2" />
+                <ScalarProperty Name="HouseholdNeed3" ColumnName="HouseholdNeed3" />
+                <ScalarProperty Name="HouseholdNeed4" ColumnName="HouseholdNeed4" />
+                <ScalarProperty Name="HouseholdNeed5" ColumnName="HouseholdNeed5" />
+                <ScalarProperty Name="MobilizerRep" ColumnName="MobilizerRep" />
+                <ScalarProperty Name="MobilizerRepCode" ColumnName="MobilizerRepCode" />
+                <ScalarProperty Name="LanguageSpoken1" ColumnName="LanguageSpoken1" />
+                <ScalarProperty Name="LanguageSpoken2" ColumnName="LanguageSpoken2" />
+                <ScalarProperty Name="LanguageSpoken3" ColumnName="LanguageSpoken3" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="EmploymentStatus" ColumnName="EmploymentStatus" />
+                <ScalarProperty Name="RefererCode" ColumnName="RefererCode" />
+                <ScalarProperty Name="PreviousGroupId" ColumnName="PreviousGroupId" />
+                <ScalarProperty Name="CurrentGroupId" ColumnName="CurrentGroupId" />
+                <ScalarProperty Name="UserFirstPortfolio" ColumnName="UserFirstPortfolio" />
+                <ScalarProperty Name="UserSecondPortfolio" ColumnName="UserSecondPortfolio" />
+                <ScalarProperty Name="UserReferralCount" ColumnName="UserReferralCount" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLGAs">
+            <EntityTypeMapping TypeName="CMSDBModel.tblLGA">
+              <MappingFragment StoreEntitySet="tblLGA">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="LGACode" ColumnName="LGACode" />
+                <ScalarProperty Name="LGAName" ColumnName="LGAName" />
+                <ScalarProperty Name="LGAId" ColumnName="LGAId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStates">
+            <EntityTypeMapping TypeName="CMSDBModel.tblState">
+              <MappingFragment StoreEntitySet="tblState">
+                <ScalarProperty Name="NoRegisteredUsers" ColumnName="NoRegisteredUsers" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="StateDescription" ColumnName="StateDescription" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWards">
+            <EntityTypeMapping TypeName="CMSDBModel.tblWard">
+              <MappingFragment StoreEntitySet="tblWard">
+                <ScalarProperty Name="WardIdNew" ColumnName="WardIdNew" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="WardAddress" ColumnName="WardAddress" />
+                <ScalarProperty Name="WardId" ColumnName="WardId" />
+                <ScalarProperty Name="WardCode" ColumnName="WardCode" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="WardDescription" ColumnName="WardDescription" />
+                <ScalarProperty Name="LGAId" ColumnName="LGAId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblINECVotersRegisters">
+            <EntityTypeMapping TypeName="CMSDBModel.tblINECVotersRegister">
+              <MappingFragment StoreEntitySet="tblINECVotersRegister">
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="VotersRegisterID" ColumnName="VotersRegisterID" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="YearOfBirth" ColumnName="YearOfBirth" />
+                <ScalarProperty Name="PassportPhoto" ColumnName="PassportPhoto" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+                <ScalarProperty Name="OtherName" ColumnName="OtherName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Delim" ColumnName="Delim" />
+                <ScalarProperty Name="PollingBoothId" ColumnName="PollingBoothId" />
+                <ScalarProperty Name="WardId" ColumnName="WardId" />
+                <ScalarProperty Name="LGAId" ColumnName="LGAId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblElectionResults">
+            <EntityTypeMapping TypeName="CMSDBModel.tblElectionResult">
+              <MappingFragment StoreEntitySet="tblElectionResult">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="VoidedVotes" ColumnName="VoidedVotes" />
+                <ScalarProperty Name="ValidVotes" ColumnName="ValidVotes" />
+                <ScalarProperty Name="PollingBoothId" ColumnName="PollingBoothId" />
+                <ScalarProperty Name="WardId" ColumnName="WardId" />
+                <ScalarProperty Name="LGAId" ColumnName="LGAId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="PartyId" ColumnName="PartyId" />
+                <ScalarProperty Name="ElectionDefinitionId" ColumnName="ElectionDefinitionId" />
+                <ScalarProperty Name="ElectionResultId" ColumnName="ElectionResultId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPoliticalParties">
+            <EntityTypeMapping TypeName="CMSDBModel.tblPoliticalParty">
+              <MappingFragment StoreEntitySet="tblPoliticalParty">
+                <ScalarProperty Name="PartyCode" ColumnName="PartyCode" />
+                <ScalarProperty Name="PartyLogo" ColumnName="PartyLogo" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PartyName" ColumnName="PartyName" />
+                <ScalarProperty Name="PartyId" ColumnName="PartyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPollingBooths">
+            <EntityTypeMapping TypeName="CMSDBModel.tblPollingBooth">
+              <MappingFragment StoreEntitySet="tblPollingBooth">
+                <ScalarProperty Name="Delim" ColumnName="Delim" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PollingBoothId" ColumnName="PollingBoothId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PollingBoothName" ColumnName="PollingBoothName" />
+                <ScalarProperty Name="PollingBoothCode" ColumnName="PollingBoothCode" />
+                <ScalarProperty Name="WardId" ColumnName="WardId" />
+                <ScalarProperty Name="LGAId" ColumnName="LGAId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
